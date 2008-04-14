@@ -1,0 +1,21 @@
+<% manufacturer = manufacturer_list_form_row %>
+<% row_class = alternate() %>
+<tr class="<%= row_class %> <%= 'selected' if product.manufacturers.include?(manufacturer)%>">
+	<td>
+		<%= check_box_tag("product[manufacturer_ids][]", manufacturer.id, product.manufacturers.include?(manufacturer)) %>
+	</td>
+	<td colspan="3">
+		<%=h manufacturer.name %>
+	</td>
+</tr>
+<% for child in manufacturer.children do %>
+	<tr class="<%= row_class %> <%= 'selected' if product.manufacturers.include?(child)%>">
+		<td>&nbsp;</td>
+		<td>
+			<%= check_box_tag("product[manufacturer_ids][]", child.id, product.manufacturers.include?(child)) %>
+		</td>
+		<td colspan="2">
+			<%=h child.name %>
+		</td>
+	</tr>
+<% end %>

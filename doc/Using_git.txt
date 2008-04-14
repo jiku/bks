@@ -1,0 +1,6 @@
+The problem with git stems from not having made the .gitignore files before the first commit.
+So the vendor directory is included, the log/*.log files are included (allbeit all zero in size), tmp/**/*, config/database.yml, etc.
+
+It can be solved by using a git rm. Like this:
+
+git rm log/*.log, etc.

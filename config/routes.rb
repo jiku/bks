@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect '/store/show_by_manufacturers/*manufacturers',
+    :controller => 'store',
+    :action     => 'show_by_manufacturers'
+      
   # default
   map.connect '',
     :controller => 'content_nodes',

@@ -1,0 +1,6 @@
+<% if manufacturer.product_count > 0 then %>
+	<%= link_to manufacturer.name, :action => 'list_by_manufacturers', :key => manufacturer.id %>
+<% else %>
+	<%=h manufacturer.name %>
+<% end %>
+<span class="info">(<%= pluralize(manufacturer.product_count, 'item') %>)</span>

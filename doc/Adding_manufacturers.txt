@@ -1,0 +1,65 @@
+Structure of all of this:
+
+
+Product inherits from Item.
+
+In the Product table, there's a field called product_id, which is always set to 0,
+but it does have an id (primary key) field also, which is auto_int.
+
+The product_id referenced in the join_tables actually seems to be referencing the
+Item table's id (primary key) field.
+How and why is it mapped like that?
+
+
+
+---
+
+Hi.
+
+I'm trying to mirror the way tags are done to add manufacturers.
+
+I have created the MVC equivalents of the files related to tags, and updated
+
+
+
+ by first copying them to the /app/ and renaming accordingly.
+In the files, I've exchanged 'tag' with 'manufacturer' and 'Tag' with 'Manufacturer'.
+
+Here's the migration file:
+
+
+I have edited /app/views/products/_crud_right.rhtml a bit so that I can manage both manufacturers and tags,
+and it works initially, before a manufacturer has been created.
+
+But, when trying to create or edit a product when one or more manufacturers have been created, I get
+
+FROM FIELD manufacturers_products
+
+
+An ugly workaround for this is to copy the products_manufacturers table and rename to manufacturers_products it asks for.
+Now the new and edit views appear fine, showing both manufacturers and tags.
+
+Does anyone have any idea why it looks for manufacturers_products instead of?
+The join_table in Manufacturer is called "products_manufacturers".
+
+
+After hacking that in, the second error appears, which happens when trying to save the product:
+
+	ActiveRecord::AssociationTypeMismatch in Admin/productsController#save
+	Manufacturer expected, got Manufacturer
+
+This only happens if one or more manufacturers are checked before trying to save.
+
+Anyone have an idea about this one?
+
+Is it from two Manufacturer models being created and the wrong one being passed?
+Or the right one being passed, but altered from what was expected?
+
+
+I'm trying to figure all this out, but shouldn't it work for Product to have two independent HABTM relationships?
+
+I'd like it this way instead of a one-to-many relationship because of sub-manufactured
+and jointly manufacturered products.
+
+
+Thanks!

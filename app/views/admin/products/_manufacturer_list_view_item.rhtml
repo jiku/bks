@@ -1,0 +1,11 @@
+<% manufacturer = manufacturer_list_view_item %>
+<li>
+	<%= render :partial => 'manufacturer_text', :locals => { :manufacturer => manufacturer } %>
+	<% if manufacturer.product_count > 0 %>
+		<ul>
+			<% for child in manufacturer.children do %>
+				<li><%= render :partial => 'manufacturer_text', :locals => { :manufacturer => child } %></li>
+			<% end %>
+		</ul>
+	<% end %>
+</li>

@@ -1,0 +1,18 @@
+<div id="left">
+	<h1>View Products By Manufacturer</h1>
+	<ul class="navigation secondary">
+    <li><a href="/admin/products/list/">Back to Product List</a></li>
+  </ul>
+	<!-- View products by manufacturer -->
+	<ul id="view_manufacturers">
+		<% if @manufacturers.length > 0 %>
+			<%= render(:partial => 'manufacturer_list_view_item', :collection => @manufacturers) %>
+		<% else %>
+			<li>No Manufacturers have been created yet</li>
+		<% end %>
+	</ul>
+</div>
+
+<%= render(:partial => 'right_side') %>
+
+<div class="clear"></div>

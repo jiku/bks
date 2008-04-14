@@ -1,0 +1,179 @@
+<% content_for :header do %>
+	<script language="javascript" type="text/javascript">
+		/**
+		 * There's a lot of JS in this page I should probably move
+		 * to an external file, but for now I'm just leaving it here.
+		 *
+		 * All of it is specific to the AJAX stuff on this page.
+		 */
+
+		// Deletes a row after AJAX completion & recolors table
+		var returnVal = null;
+
+		// Checks to see if there are no manufacturers, shows the "no manufacturers" row if necessary
+		function noManufacturersCheck() {
+			var list = $("manufacturer_list");
+			// Possibly no manufacturers - show no manufacturers row
+			if (list.children.length == 2) {
+				Element.show("no_manufacturers_row");
+			} else {
+				Element.hide("no_manufacturers_row")
+			}
+		}
+
+		function deleteRow(row_id) {
+			Element.remove($(row_id));
+			noManufacturersCheck();
+		}
+
+		// Shows spinning status wait thing
+		function status(manufacturer_id) {
+			Element.hide("trash_"+manufacturer_id);
+			Element.show("spin_"+manufacturer_id);
+		}
+
+		// Shows spinning loading status for creating a manufacturer
+		function loadingCreateManufacturer() {
+			// Show progress
+			$("save_button").disabled = true;
+		}
+
+		// On success of a manufacturer creation makes a new row in our table
+		function insertManufacturer(request) {
+			var content = request.responseText;
+	
+			if (content == "") {
+				// Create failed!
+				alert("Creation of this Manufacturer failed.\nDid you enter a duplicate name?");
+			} else {
+				// Create worked, make new table row and fill it in
+				new Insertion.Bottom($("manufacturer_list"), content);
+				Sortable.create("manufacturer_list", {onUpdate:function(){new Ajax.Request('/admin/manufacturers/update_manufacturer_rank', {asynchronous:true, evalScripts:true, parameters:Sortable.serialize("manufacturer_list")})}});
+			}
+			// Reload form
+			$("manufacturer_name").value = "";
+			$("save_button").disabled = false;
+			noManufacturersCheck();
+		}
+
+		// Starts editing of manufacturer
+		function showEditManufacturer(manufacturer_id) {
+			Element.hide("manufacturer_name_"+manufacturer_id);
+			Element.hide("manufacturer_rename_"+manufacturer_id);
+			Element.show("manufacturer_rename_controls_"+manufacturer_id);
+			Element.show("manufacturer_edit_"+manufacturer_id);
+			// focus on edit
+			//$("manufacturer_input_"+manufacturer_id).value = $("manufacturer_name_"+manufacturer_id).innerHTML;
+			$("manufacturer_input_"+manufacturer_id).focus();
+		}
+
+		// Saves edit to a manufacturer name
+		function saveEdit(manufacturer_id) {
+			Element.hide("manufacturer_rename_controls_"+manufacturer_id);
+			Element.show("spin_edit_"+manufacturer_id);
+			// Make AJAX request to rename manufacturer
+			new Ajax.Request('/admin/manufacturers/update', 
+					{ parameters:'id='+manufacturer_id+'&name='+$F("manufacturer_input_"+manufacturer_id), 
+						evalScripts:true,
+					  onFailure:editFailure }
+					);
+		}
+
+		// Runs when AJAX edit failure
+		function editFailure(t) {
+			alert("There was a communication error with the server when trying to save your manufacturer.")
+		}
+
+	</script>
+	<style type="text/css">
+		/* make sure both hide/show divs have the same height so no UI jump */
+		#create_manufacturer, #create_loading {
+			height: 35px;
+		}
+	</style>
+<% end %>
+
+<div id="left">
+
+	<h1><%= @title %></h1>
+	
+	<ul class="navigation secondary">
+		<li><a href="/admin/products/list">Back to Products</a></li>
+	</ul>
+
+	<!-- AJAX CREATE TAG FORM -->
+	<div id="create_manufacturer" align="center">
+		<%= 
+			form_remote_tag(
+				:complete => "",
+				:url => {
+					:controller => "manufacturers",
+					:action => "create",
+					:id => @parent_manufacturer_id
+				},
+				:loading => "loadingCreateManufacturer();",
+				:complete => "insertManufacturer(request);",
+				:position => "manufacturer_list"
+				)
+			%>
+			<table>
+				<tr>
+					<td>
+						<%= text_field 'manufacturer', 'name', :class => 'textInput big' %>
+					</td>
+					<td>
+						<%= submit_tag "Save New Manufacturer", :id => "save_button", :class => 'button' %>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<!-- CREATE LOADING SCREEN -->
+
+	<h2>
+		<% if !@parent_manufacturer %>
+			Top Level Manufacturers
+		<% else %>
+			<a href="/admin/manufacturers/list">Top Level Manufacturers</a> &gt; 
+			<% if @parent_manufacturer.parent %>
+				<%= link_to(@parent_manufacturer.parent.name, :action => 'list', :id => @parent_manufacturer.parent.name ) %> &gt;
+			<% end %>
+			<%= @parent_manufacturer.name %>
+		<% end %>
+	</h2>
+
+	<!-- TAG TABLE LIST -->
+	<ul id="manufacturer_list" class="sortable">
+		<%= render(:partial => 'manufacturer_list_row', :collection => @manufacturers) %>
+	</ul>
+	<div id="no_manufacturers_row" style="display:<%= @manufacturers.size > 0 ? 'none' : '' %>;">No manufacturers to show...</div>
+	<%= 
+		sortable_element(
+			'manufacturer_list',
+			:url => { :action => 'update_manufacturer_rank' }
+		) 
+	%>
+
+</div>
+<div id="right">
+	<%= render :partial => '/admin/preferences/sidebar' %>
+		
+	<h1>Help</h1>
+	<h3>Manufacturer Groups</h3>
+	<p><span class="hlt">
+		You may group manufacturers two levels deep.
+	</span></p>
+	<p>
+		To use a manufacturer as a group click on it's name. You will be taken to another view where you may create and order manufacturers within the group.
+	</p>
+	<p>
+		Deleting a manufacturer group will delete all manufacturers within as well.
+	</p>
+	<h3>Sorting</h3>
+	<p>
+		You can sort the items shown by dragging and dropping them.
+	</p>
+	
+</div>
+
+<div class="clear"></div>

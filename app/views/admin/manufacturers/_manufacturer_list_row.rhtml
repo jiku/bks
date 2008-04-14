@@ -1,0 +1,54 @@
+<li id="manufacturer_<%= manufacturer_list_row.id %>" style="clear:both;" onselectstart="return false;">
+	<div style="float:right;">
+		<!-- rename stuff -->
+		<span style="margin-right:10px;">
+			<span id="manufacturer_rename_<%= manufacturer_list_row.id %>">
+				<a href="#" onclick="showEditManufacturer(<%= manufacturer_list_row.id %>);return false;">
+					<%= image_tag 'icons/png-24/16-em-pencil.png', :plugin => 'substruct', :alt => 'Edit' %>
+				</a>
+			</span>
+		</span>
+
+		<!-- delete -->
+		<%= link_to_remote image_tag("icons/png-24/16-em-cross.png", :id => "trash_#{manufacturer_list_row.id}", :plugin => 'substruct', :alt => 'Delete'),
+		    :url => {
+		        :controller => "manufacturers",
+		        :action => "destroy", 
+		        :id => manufacturer_list_row.id},
+		    :loading => "status(#{manufacturer_list_row.id});",
+				:complete => "deleteRow('manufacturer_#{manufacturer_list_row.id}');"
+		%>
+		<!-- delete indicator -->
+		<%= image_tag 'indicator.gif', :id => "spin_#{manufacturer_list_row.id}", :style => "display:none;", :plugin => 'substruct' %>
+	</div>
+
+	<!-- edit control -->
+	<span id="manufacturer_edit_<%= manufacturer_list_row.id %>" style="display:none;">
+		<input type="text" id="manufacturer_input_<%= manufacturer_list_row.id %>" class="textInput" value="<%= manufacturer_list_row.name %>" size="30" />
+	</span>
+	<span id="manufacturer_rename_controls_<%= manufacturer_list_row.id %>" style="display:none;">
+		<a href="#" onclick="saveEdit(<%= manufacturer_list_row.id %>);return false">
+			<%= image_tag 'icons/png-24/16-em-check.png', :plugin => 'substruct', :alt => 'Save' %>
+		</a>
+	</span>
+	<!-- rename indicator -->
+	<%= image_tag 'indicator.gif', :plugin => 'substruct', :id => "spin_edit_#{manufacturer_list_row.id}", :style => "display:none;" %>
+
+	<!-- name -->
+	<span id="manufacturer_name_<%= manufacturer_list_row.id %>">
+		<% if manufacturer_list_row.parent == nil %>
+			<%= 
+				link_to(
+					manufacturer_list_row.name,
+					:action => 'list',
+					:id => manufacturer_list_row.name
+				)
+			%>
+			<br/>
+			<span class="info"><%= pluralize(manufacturer_list_row.children.size, 'manufacturer') %> below</span>
+		<% else %>
+			<%= manufacturer_list_row.name %>
+		<% end %>
+	</span>
+
+</li>
