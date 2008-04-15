@@ -1,0 +1,28 @@
+<%
+	@product_image = product.images[0]
+	if @product_image then
+      	product_image_url = @product_image.public_filename(:small)
+	else
+	  	product_image_url = '/plugin_assets/substruct/images/public-ui/no-product-image.gif'
+	end
+-%>
+<%
+	# @ because of what? I think going with a bt / hm relationship might be better than multiple manufacturers.
+	@manufacturer = product.manufacturers[0]
+	if @manufacturer then
+	  	# manufacturer_url = @manufacturer.public_filename(:small)
+	  	manufacturer_image_url = '/images/manufacturers/' + @manufacturer.name + '.gif'
+	else
+	  	manufacturer_image_url = '/images/manufacturers/black_label.gif'
+	end
+-%>
+<%= 
+	make_product(
+        product_image_url, 
+		url_for(:controller => 'store', :action => 'show', :id => product.code),
+		product.name,
+		manufacturer_image_url,
+		@manufacturer.name,
+		product.display_price
+		) 
+-%>
