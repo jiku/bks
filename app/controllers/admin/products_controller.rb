@@ -29,7 +29,7 @@ class Admin::ProductsController < Admin::BaseController
   end
   
   # Lists products by manufacturer #!% TRENGER EGENTLIG IKKE DENNE TROR JEG... KANSKJE
-  def list_by_manufacturer
+  def list_by_manufacturers
 
     @list_options = Manufacturer.find_alpha
 
@@ -102,11 +102,13 @@ class Admin::ProductsController < Admin::BaseController
     @title = "New Product"
 		@image = Image.new
     @product = Product.new
+    @manufacturers = Manufacturer.find(:all)
   end
   
   def edit
     @title = "Editing A Product"
     @product = Product.find(params[:id])
+    @manufacturers = Manufacturer.find(:all, :order => 'name ASC')
 		@image = Image.new
   end
 
@@ -125,36 +127,32 @@ class Admin::ProductsController < Admin::BaseController
       @product = Product.new()
     end
     @product.attributes = params[:product]
-		if @product.save
-		  # Save product manufacturers
-			# Our method doesn't save manufacturers properly if the product doesn't already exist.
-			# Make sure it gets called after the product has an ID
-			@product.manufacturer_ids = params[:product][:manufacturer_ids] if params[:product][:manufacturer_ids]
-		  
-			# Save product tags
+	  if @product.save  
+		  # Save product tags
 			# Our method doesn't save tags properly if the product doesn't already exist.
 			# Make sure it gets called after the product has an ID
 			@product.tag_ids = params[:product][:tag_ids] if params[:product][:tag_ids]
       # Build product images from upload
       image_errors = []
 			params[:image].each do |i|
-        if i[:image_data] && !i[:image_data].blank?
-          new_image = Image.new
-          logger.info i[:image_data].inspect
-          new_image.uploaded_data = i[:image_data]
-          if new_image.save
-            @product.images << new_image
-          else
-            image_errors.push(new_image.filename)
-          end
-       end
+      if i[:image_data] && !i[:image_data].blank?
+        new_image = Image.new
+        logger.info i[:image_data].inspect
+        new_image.uploaded_data = i[:image_data]
+        if new_image.save
+          @product.images << new_image
+        else
+          image_errors.push(new_image.filename)
+        end
       end
+    end
 
       # Build variations from form
       if !params[:variation].blank?
         params[:variation].each do |v|
           variation = @product.variations.find_or_create_by_id(v[:id])
           variation.attributes = v
+          variation.manufacturer_id = params[:product][:manufacturer_id] # This makes sure that the product's manufacture_id is also set for all variations.
           variation.save
           @product.variations << variation
         end

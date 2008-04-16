@@ -108,7 +108,7 @@ class StoreController < ApplicationController
     @title = @product.name
     @images = @product.images.find(:all)
     @default_image = @images[0]
-    @full_product_name = @product.manufacturers[0].name + ' ' + @product.name
+    @full_product_name = @product.manufacturer.name + ' ' + @product.name
     @variations = @product.variations.find(
       :all, 
       :order => 'name ASC',
