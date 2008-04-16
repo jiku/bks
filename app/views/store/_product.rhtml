@@ -8,10 +8,9 @@
 -%>
 <%
 	# @ because of what? I think going with a bt / hm relationship might be better than multiple manufacturers.
-	@manufacturer = product.manufacturers[0]
-	if @manufacturer then
-	  	# manufacturer_url = @manufacturer.public_filename(:small)
-	  	manufacturer_image_url = '/images/manufacturers/' + @manufacturer.name + '.gif'
+	if product.manufacturer then
+	  	# manufacturer_url = @product.manufacturer.public_filename(:small)
+	  	manufacturer_image_url = '/images/manufacturers/' + product.manufacturer.name + '.gif'
 	else
 	  	manufacturer_image_url = '/images/manufacturers/black_label.gif'
 	end
@@ -22,7 +21,7 @@
 		url_for(:controller => 'store', :action => 'show', :id => product.code),
 		product.name,
 		manufacturer_image_url,
-		@manufacturer.name,
+		product.manufacturer.name,
 		product.display_price
 		) 
 -%>

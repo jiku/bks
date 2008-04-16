@@ -61,7 +61,8 @@
 					%>
 						<%= image_tag "/public/no_image_50.png", :plugin => 'substruct', :align => 'left',  :style => 'margin:5px;' %>
 					<% end %>
-					<%= item.product.manufacturers[0].name %>
+					<!-- Using Manufacturer from the view is incredibly ugly. Find out how item.name is made to comprise both product name and variation name. -->
+					<%= Manufacturer.find(item.product.manufacturer_id).name %>	
 					<%= item.name %>
 				</td>
 				<td class="money numeric"><%= number_to_currency(item.unit_price) %></td>

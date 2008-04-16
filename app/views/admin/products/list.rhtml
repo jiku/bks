@@ -31,7 +31,7 @@
   <% if @products.length > 0 then %>
     <% for product in @products %>
     <tr class="<%= alternate %>">
-     <td><%= product.manufacturers[0].name %></td> 	
+     <td><%= product.manufacturer.name %></td> 	
      <td><%= link_to(h(product.name), :action => 'edit', :id => product) %></td>
       <td><%= product.code %></td>
       <td class="numeric"><%= number_to_currency(product.price) %></td>

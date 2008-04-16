@@ -13,8 +13,7 @@ module Substruct
   # This is useful for me on the demo site where I don't want
   # to set up a SSL cert.
   mattr_accessor :override_ssl_production_mode
-  # self.override_ssl_production_mode = false
-  self.override_ssl_production_mode = true
+  self.override_ssl_production_mode = false
 
 	# For alternating row colors...
 	def alternate(str1 = "odd", str2 = "even")
