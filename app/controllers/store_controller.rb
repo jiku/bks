@@ -36,7 +36,7 @@ class StoreController < ApplicationController
 
   # Our simple store index
   def index
-    @title = "Store"
+    @title = "Butikk"
 		@tags = Tag.find_alpha
 		@tag_names = nil
 		@viewing_tags = nil
@@ -51,7 +51,7 @@ class StoreController < ApplicationController
   
   def search
     @search_term = params[:search_term]
-    @title = "Search Results for: #{@search_term}"
+    @title = "Søkeresultater for: #{@search_term}"
     @products = Product.paginate(
       :order => 'name ASC',
       :conditions => ["(name LIKE ? OR code = ?) AND #{Product::CONDITIONS_AVAILABLE}", "%#{@search_term}%", @search_term],
@@ -84,7 +84,7 @@ class StoreController < ApplicationController
 		end
 		@viewing_tags = Tag.find(tag_ids_array)
 		viewing_tag_names = @viewing_tags.collect { |t| " > #{t.name}"}
-		@title = "Store #{viewing_tag_names}"
+		@title = "Butikk #{viewing_tag_names}"
 		@tags = Tag.find_related_tags(tag_ids_array)
 		
 		# Paginate products so we don't have a ton of ugly SQL
@@ -179,7 +179,7 @@ class StoreController < ApplicationController
   # The old (non-ajax) way of doing things
   def empty_cart
     clear_cart_and_order
-    redirect_to_index("All items have been removed from your order.")
+    redirect_to_index("Alle produktene ble fjernet fra handlekurven din.")
   end
 
   # Gathers customer information.
@@ -187,7 +187,7 @@ class StoreController < ApplicationController
   #
   # Also displays items in the current order
   def checkout
-    @title = "Please enter your information to continue this purchase."
+    @title = "Ordreinformasjon"
     @items = @cart.items
     @order = find_order
     @cc_processor = Order.get_cc_processor
@@ -201,7 +201,7 @@ class StoreController < ApplicationController
         initialize_existing_order
       end
       if @items.empty?
-        redirect_to_index("You've not chosen to buy any items yet. Please select an item from this page.")
+        redirect_to_index("Handlekurven din er tom. Du må legge til et eller flere produkter før du kan fortsette til kassen.")
       end
     elsif request.post?
       # Turned into a private method now so we don't have checkout/do_checkout...
@@ -213,10 +213,10 @@ class StoreController < ApplicationController
   # Used with live rate calculation
   # Lets customer choose what method to use
   def select_shipping_method
-    @title = "Select Your Shipping Method - Step 2 of 3"
+    @title = "Velg fraktmåte"
 
     if @order == nil then
-      redirect_to_checkout("Have you entered all of this information yet?") and return
+      redirect_to_checkout("Har du lagt til all denne informasjonen enda?") and return
     end
     
     if (Substruct.use_live_rate_calculation == true) then
@@ -256,7 +256,7 @@ class StoreController < ApplicationController
   # or process their order.
   #
   def confirm_order
-    @title = "Please confirm your order. - Step 3 of 3"
+    @title = "Bekreft ordre"
     @cc_login = Order.get_cc_login 
     @paypal_url = Paypal.service_url
     # Make sure a shipping method is set
@@ -269,7 +269,7 @@ class StoreController < ApplicationController
   #
   # Submits order info to Authorize.net
   def finish_order
-    @title = "Thanks for your order!"
+    @title = "Takk for bestillingen!"
     cc_processor = Order.get_cc_processor
     order_success = @order.run_transaction
     if order_success == true

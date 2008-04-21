@@ -1,8 +1,6 @@
 <% if @cart.empty? then %>
 	<div style="margin-top:25px;">
-		Add items to your cart using the <i>Add To Cart</i> links above.
-		<br/>
-		If you'd like to add multiple quantities of an item click the link twice.
+		Legg til produkter ved å trykke på <i>Legg til handlekurv</i> linken over.
 	</div>
 <% else %>
 	<div class="cartItem" style="text-align:left;width:100px;margin-top:22px;">
@@ -14,7 +12,7 @@
 			</span>
 		</div>
 		<div style="margin-top:4px;">
-			<a href="<%= get_link_to_checkout %>" class="action">Checkout Now</a>
+			<a href="<%= get_link_to_checkout %>" class="action">Gå til kassen</a>
 		</div>
 		<div style="margin-top:10px;"><%= link_to_remote 'Empty cart',
 	  	  :url => {
@@ -58,7 +56,7 @@
 							<%= image_tag "/public/no_image_50.png", :plugin => 'substruct' %>
 						<% end %>
 					</div>
-					<span class="info"><%= link_to_remote 'Remove',
+					<span class="info"><%= link_to_remote 'Fjern',
 							:url => {
 									:controller => "store",
 									:action => "remove_from_cart_ajax",

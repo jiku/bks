@@ -2,15 +2,15 @@
 
 <table cellpadding="0" cellspacing="0" class="list">
   <tr>
-    <th>Item</th>
-    <th class="numeric">Total</th>
+    <th>Produkt</th>
+    <th class="numeric">Totalpris</th>
   </tr>
 <% for item in cart.items %>
   <tr class="<%= alternate %>">
     <td>
 	  <%= item.name %> <span class="info">(x<%= item.quantity %>)
       <br/>
-      <%= number_to_currency(item.unit_price) %> each
+      <%= number_to_currency(item.unit_price) %> hver
       </span>
     </td>
     <td class="numeric"><%= number_to_currency(item.total) %></td>
@@ -18,7 +18,7 @@
 <% end %>
 <% if cart.items.length == 0 then %>
   <tr>
-    <td colspan="2" class="info">Nothing in your cart so far.</td>
+    <td colspan="2" class="info">Det finns ingenting i handlekurven din ennå.</td>
   </tr>
 <% end %>
 	<% if cart.tax_cost > 0 %>

@@ -1,17 +1,17 @@
 <% @two_column_layout = true %>
 
 <div id="left">
-  <h1>Secure Order Form - Step 1 of 3</h1>
+  <h1><%= @title %></h1>
 
-  <h2>Please fill in the fields below</h2>
+  <h3>Her skriver du inn kontaktinformasjon, betalingsform og evt. kampanjekode.</h3>
   <% if request.ssl? %>
     <p>
-      <img src="/images/lock.gif" alt="Lock Icon" /> All information transmitted is <b>secure</b>.
+      <img src="/images/lock.gif" alt="Lock Icon" />All informasjonen er sendt <b>sikker</b>.
     </p>
   <% end %>
 
   <p>
-    Once you are done entering your information, scroll to the <a href="#bottom">bottom of the page</a> and press the <i>Submit Order Information</i> button.
+    Når du har fyllt ut feltene går du til <a href="#bottom">bunnen av siden</a> og trykker på <i>Send ordreinformasjon</i>.
   </p>
 
   <%= form_tag :action => 'checkout' %>
@@ -53,19 +53,19 @@
 
 		<!-- BILLING ADDRESS -->
 		<div class="form_block">
-	    <h2>Billing &amp; Shipping Address</h2>
+	    <h2>Adresse</h2>
 	    <%= render(:partial => '/admin/orders/address', :locals => {:address_type => 'billing'}) %>
 
 	    <br/>
 	    <div class="padLeft">
-	      <label><%= check_box_tag("use_separate_shipping_address", 'true', @use_separate_shipping_address, :class => 'inline', :id => 'use_diff_shipping') %> Ship to a different address</label>
+	      <label><%= check_box_tag("use_separate_shipping_address", 'true', @use_separate_shipping_address, :class => 'inline', :id => 'use_diff_shipping') %> Send til en annen adresse</label>
 	    </div>
 		</div>
 		
 		<!-- SHIPPING ADDRESS -->
     <div id="shipping_address" class="form_block"
      style="<%= 'display:none;' if !@use_separate_shipping_address %>">
-      <h2>Shipping Address</h2>
+      <h2>Adresse</h2>
       <%= render(:partial => '/admin/orders/address', :locals => {:address_type => 'shipping'}) %>
     </div>
 
@@ -77,10 +77,11 @@
     	</div>
     <% end -%>
 
+
 		<!-- PROMO CODE -->
 		<% if Promotion.any_active? %>
 			<div class="form_block">
-				<h2>Promotion Code</h2>
+				<h2>Kampanjekode</h2>
 				<div class="padLeft">
 					<div class="float">
 						<p>
@@ -89,7 +90,7 @@
 						</p>
 					</div>
 						<p>
-							If you have a promotion code, enter it here.
+							Hvis du har en kampanjekode, skriv den inn her.
 						</p>
 					<div class="clear"></div>
 				</div>
@@ -100,7 +101,7 @@
 
     <a name="bottom"></a>
     <p>
-			<%= submit_tag('Submit Order Information', :class => 'button', :disable_with => 'Submitting information, please wait...') %>
+			<%= submit_tag('Send ordreinformasjon', :class => 'button', :disable_with => 'Sender informasjon, vennligst vent...') %>
       <div class="clear">&nbsp;</div>
     </p>
   </form>
@@ -110,22 +111,22 @@
 
 <div id="right">
 
-  <h1>You Are Buying</h1>
+  <h1>Handlekurv</h1>
   <%= render(:partial => 'cart_contents', :locals => {:cart => @cart}) %>
 
   <%= render(:partial => 'clear_cart') %>
 
   <!-- ADD MORE ITEMS -->
 
-  <h2>Want To Buy More Items?</h2>
+  <h2>Vil du legge til flere produkter?</h2>
   <p>
-    <a href="/store">Go back to this page</a>.
+    <a href="/store">Gå tilbake til butikken igjen</a>.
   </p>
 
 
-  <h2>Need help?</h2>
+  <h2>Er det noe du stusser på?</h2>
   <p>
-    <a href="/contact">Contact us</a>
+    <a href="/contact">Kontakt oss</a>
   </p>
 </div>
 

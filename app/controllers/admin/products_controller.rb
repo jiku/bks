@@ -102,7 +102,7 @@ class Admin::ProductsController < Admin::BaseController
     @title = "New Product"
 		@image = Image.new
     @product = Product.new
-    @manufacturers = Manufacturer.find(:all)
+    @manufacturers = Manufacturer.find(:all, :order => 'name ASC')
   end
   
   def edit

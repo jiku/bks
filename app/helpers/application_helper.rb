@@ -33,6 +33,21 @@ module ApplicationHelper
     
     return str
   end
+  
+	#Convert currency to NOK kr.
+  def number_to_currency(number, options = {})
+    options   = options.stringify_keys
+	  precision = options["precision"] || 2
+	  separator = precision > 0 ? options["separator"] || "," : ""
+	  delimiter = options["delimiter"] || "."
+	
+		begin
+		  parts = number_with_precision(number, precision).split('.')
+			"kr " + number_with_delimiter(parts[0], delimiter) + ",-"
+		rescue
+		  number
+		end
+	end  
 
   def make_product(image_path, link, title, manufacturer_path, manufacturer_name, cost=nil, on_sale=false, is_new=false)
     product = '<div class="product">'
@@ -57,7 +72,7 @@ module ApplicationHelper
     			<\/div>
     /
     if cost
-      product << %Q/ <span class="money">US #{sub_number_to_currency(cost)}<\/span> /
+      product << %Q/ <span class="money">#{sub_number_to_currency(cost)}<\/span> /
     end
     product << %Q/
     		<\/div>

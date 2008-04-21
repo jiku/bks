@@ -4,25 +4,25 @@
 		<col />
 	</colgroup>
   <tr>
-    <th>Shipping Via</th>
+    <th>Sendes med</th>
 		<td>
 			<% if @order.order_shipping_type.nil? then %>
-	    	The fastest way possible...
+	    	(raskest.)
 			<% else %>
 				<%= @order.order_shipping_type.name %>
 			<% end %>
 		</td>
   </tr>
   <tr>
-    <th>Shipping Cost</th>
+    <th>Frakt</th>
     <td><%= number_to_currency(@order.shipping_cost) %></td>
   </tr>
 	<tr>
-		<th>Items</th>
+		<th>Produkter</th>
 		<td><%= number_to_currency(@order.line_items_total) %></td>
 	</tr>
   <tr>
-    <th>Final Order Total</th>
+    <th>Totalt</th>
     <td class="money"><%= number_to_currency(@order.total) %></td>
   </tr>
 </table>

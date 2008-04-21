@@ -1,0 +1,14 @@
+<h2>Email-adresse</h2>
+<div class="padLeft" style="padding-bottom:10px;">
+	<%# make_label("Din Email Address", true) %>
+  <%= text_field 'order_user', 'email_address', :class => 'textInput' %>
+	<%= error_message_on(:order_user, :email_address) %>
+	<br/>
+	<span class="info">
+		<br/>
+		Vi kommer aldri til å selge, spamme eller dele email-adressen din med noen.<br/>
+		Du vil senere kunne logge inn med email-adressen din for å sjekke ordrestatus, endre
+		huskelisten din, endre varslinger, mm.
+	</span>
+	
+</div>
