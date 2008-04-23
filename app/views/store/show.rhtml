@@ -2,20 +2,21 @@
 <div id="left">
  	<h1>
 		<%= @full_product_name %>
-		<span class="info"><%= @product.code %></span>
+		<!--span class="info"><%= @product.code %></span-->
 	</h1>
 	<ul class="navigation secondary">
-    <li><a href="/store">Back to store index</a></li>
+    <li><a href="/store">Tilbake</a></li>
   </ul>
 	<% if @default_image %>
-		<div style="float:left; margin:20px; width: 200px;">
+		<div style="float:left; margin-right:24px; width: 200px;">
       <% if @default_image.public_filename(:small) then %>
         <%= image_tag(@default_image.public_filename(:small)) %>
       <% end %>
 			<!-- thumbnails! -->
 			<% if @images.size > 1 %>
-				<h4>Other product images</h4>
-				<p class="info">Click to see full view</p>
+				<br/><br/>
+				<h4>Flere produktbilder</h4>
+				<p class="info">Klikk for å se større bilder</p>
 				<% for @p_image in @images do %>
 					<!-- product image for reordering -->
 					<div class="float" style="margin:5px;">
@@ -35,7 +36,7 @@
 	<div class="clear"></div>
 	<% if @product.related_products.size > 0 %>
 		<br/>
-		<h2>Related Products</h2>
+		<h2>Lignende produkter</h2>
 		<br/>
 		<%= render :partial => 'product', :collection => @product.related_products %>
 		<div class="clear"></div>
@@ -51,7 +52,8 @@
 		if 0 >= @product.quantity 
 	%>
 		<br/>
-		<h3>Item is out of stock</h3>
+		<h3>Har ikke flere på lager</h3>
+		Klikk her hvis du vil bli varslet når vi får inn flere (har ikke laget dette enda).
 	<%
 	 	# ITEM OR ONE OF ITS VARIATIONS IN STOCK
 		else 
@@ -62,7 +64,7 @@
 				:url=> { :controller=>'store', :action=>'add_to_cart_ajax', :id => @product.id },
 				:html => {:name => 'add_product_form'},
 				:complete => "showPopWin('/store/show_cart', 600, 400, null, true)",
-				:failure => 'alert("That item appears to have gone out of stock before you were able to add it to your cart.\n\nPlease refresh this page.")',
+				:failure => 'alert("Det ser ut til at vi gikk tom for dette produktet før du fikk lagt det til i handlekurven din.\n\nDu kan prøve å oppdatere siden.")',
 				:update => 'items'
 			)
 		%>
@@ -91,13 +93,13 @@
 		<% end %>
 		
 		<br/>
-		<h3>How many do you want?</h3>
+		<h3>Hvor mange vil du ha?</h3>
 		<table style="width:100%;text-align:center;">
 			<tr>
 				<td style="width:40%;text-align:right;padding-right:5px;">
 					<input type="text" name="quantity" class="textInput numeric" value="1" size="4" onfocus="this.select();" />
 				</td><td>
-					<input type="submit" class="button" value="Add to Cart" />
+					<input type="submit" class="button" value="Legg til handlekurv" />
 				</td>
 			</tr>
 		</table>
@@ -106,11 +108,11 @@
 	
 	<div align="center" style="margin-top:10px;">
 		<p>
-		Not ready to buy yet?
+		Ikke klar for å kjøpe ennå?
 		<br/>
 		<%= 
 			link_to(
-				'Add this item to your wishlist',
+				'Legg til huskeliste',
 				{
 					:controller => 'customers',
 					:action => 'add_to_wishlist',

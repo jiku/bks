@@ -10,15 +10,15 @@
     <% for type in session[:order_shipping_types] %>
       <label>
         <%= radio_button_tag('ship_type_id', type.id, (type.id == @default_price)) %>
-        <span class="money"><%= number_to_currency(type.calculated_price) %></span> - <b><%= type.name %></b>
+        <b><%= type.name %></b> - <span class="money"><%= number_to_currency(type.calculated_price) %></span>
         <p style="padding-left:15px;font-style:italic;">
-           Total including shipping: <%= number_to_currency(type.calculated_price+@order.total) %>
+           Total med frakt: <%= number_to_currency(type.calculated_price+@order.total) %>
         </p>
       </label>
     <% end %>
 		<div class="line"></div>
     <p>
-      <%= submit_tag "Select Shipping Method", :class => 'button', :disable_with => 'Please wait...' %>
+      <%= submit_tag "Velg fraktmåte", :class => 'button', :disable_with => 'Vennligst vent...' %>
     </p>
   </div>
 
@@ -26,7 +26,7 @@
 </div>
 
 <div id="right">
-  <h1>You Are Buying...</h1>
+  <h1>Handlekurv</h1>
   <%= render(:partial => 'cart_contents', :locals => {:cart => @order}) %>
 
   <%= render(:partial => 'clear_cart') %>

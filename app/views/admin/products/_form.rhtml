@@ -9,7 +9,6 @@
 	<div class="padLeft">
 		<div class="float">
 			<%= make_label('Manufacturer', true) %>
-		    <% # f.collection_select :artist_id, @artists, :id, :name, :style => "width: 400px;" %>
 		    <%= collection_select :product, :manufacturer_id, @manufacturers, :id, :name %>
 		</div>
 		<div class="float">
@@ -22,7 +21,7 @@
 		</div>
 		<div class="float">
 			<%= make_label('Price') %>
-			<%= text_field 'product', 'price', :class => 'textInput numeric', :size => 6, :disabled => @product.variations.size > 0  %> USD
+			<%= text_field 'product', 'price', :class => 'textInput numeric', :size => 6, :disabled => @product.variations.size > 0  %> NOK
 		</div>
 		<div class="float">
 			<%= make_label('Quantity') %>

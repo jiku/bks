@@ -3,15 +3,15 @@
 <div class="price" style="float:right;">
 	Total - <%= number_to_currency(@cart.total) %>
 </div>
-<h1>Your Cart</h1>
+<h1>Handlekurv</h1>
 
 <p>
-<a href="#" onclick="window.top.hidePopWin();return false;" class="action">Continue Shopping</a>
+<a href="#" onclick="window.top.hidePopWin();return false;" class="action">Fortsett å handle</a>
 </p>
 
 <% if @cart.empty? then %>
 	<div>
-		There's nothing in your cart at this time.
+		Det finns ingenting i handlekurven din.
 	</div>
 <% else %>
 	<table class="list" cellpadding="0" cellspacing="0">
@@ -24,10 +24,10 @@
 		</colgroup>
 		<tr>
 			<th>&nbsp;</th>
-			<th class="first">Item</th>
-			<th class="numeric">Price Each</th>
-			<th class="numeric">Quantity</th>
-			<th class="numeric">Total Price</th>
+			<th class="first">Produkt</th>
+			<th class="numeric">Pris</th>
+			<th class="numeric">Antall</th>
+			<th class="numeric">Totalpris</th>
 
 		</tr>
 		<% @cart.items.each do |item| %>
@@ -35,7 +35,7 @@
 				<td>
 					<%= 
 						link_to_remote(
-							image_tag('icons/png-24/16-em-cross.png', :plugin => 'substruct', :alt => 'Remove from cart', :id => "remove_#{item.product_id}"),
+							image_tag('icons/png-24/16-em-cross.png', :plugin => 'substruct', :alt => 'Fjern fra handlekurv', :id => "remove_#{item.product_id}"),
 							:url => {
 									:controller => "store",
 									:action => "remove_from_cart_ajax",
@@ -72,7 +72,7 @@
 			<td>
 				<%= 
 					link_to_remote(
-						image_tag('icons/png-24/16-em-cross.png', :plugin => 'substruct', :alt => 'Empty Cart', :id => 'empty_cart_image'),
+						image_tag('icons/png-24/16-em-cross.png', :plugin => 'substruct', :alt => 'Tøm handlekurv', :id => 'empty_cart_image'),
 						{
 			  	  	:url => {
 					    	:controller => "store",
@@ -80,13 +80,13 @@
 					    :loading => "$('empty_cart_image').hide(); $('indicator_delete_all').show();",
 							:complete => "window.location.reload();",
 							:update => "items",
-							:confirm => "Empty your entire cart?"
+							:confirm => "Vil du tømme handlekurven din helt?"
 						}
 					)
 				%>
 				<%= image_tag('indicator.gif', :plugin => 'substruct', :style => 'display:none;', :id => "indicator_delete_all") %>
 			</td>
-			<td colspan="3" class="numeric">Cart Total</td>
+			<td colspan="3" class="numeric">Total</td>
 			<td class="money numeric">
 				<%= number_to_currency(@cart.total) %>
 			</td>
@@ -95,10 +95,10 @@
 	<!-- take action on the cart -->
 	<div style="margin-top:10px;">
 		<div style="float:right;">
-			<a href="<%= get_link_to_checkout %>" class="button" style="width:150px;" target="_top">Checkout Now</a>
+			<a href="<%= get_link_to_checkout %>" class="button" style="width:150px;" target="_top">Gå til kassen</a>
 		</div>
 		<p>
-			<a href="#" onclick="window.top.hidePopWin();return false;" class="action">Continue Shopping</a>
+			<a href="#" onclick="window.top.hidePopWin();return false;" class="action">Fortsett å handle</a>
 		</p>
 	</div>
 <% end #products  %>
