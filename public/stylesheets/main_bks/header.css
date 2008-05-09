@@ -1,0 +1,31 @@
+div#header {
+	width: 100% auto;
+	height: 100px;
+	padding: 24px 96px;
+	background-color: #ffffff;
+}
+
+
+
+/* His stuff */
+
+
+#toplinks {
+	float: right;
+}
+
+#toplinks li {
+	margin-right: 15px;
+	float: right;
+}
+
+#searchbox {
+	float:right;
+	clear:right;
+	margin-top: 24px;
+	width: 500px;
+}
+
+#searchbox .textInput {
+	width: 250px;
+}

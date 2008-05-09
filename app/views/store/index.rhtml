@@ -1,20 +1,19 @@
 <div id="fullContent">
-	<%= will_paginate @products %>
-
 	<!-- PRODUCTS LIST -->
 	<%= render :partial => 'product', :collection => @products %>
 
   <% if @products.length == 0 then %>
     <p>
-      Beklager, fant ingen produkter.
+      Beklager, fant ingen produkter i denne kategorien.
     </p>
   <% end %>
 
-	<%= will_paginate @products %>
 
   <br/>
 	<!-- takes up space so we can see the bottom content on this page -->
 	<div id="bottomSpacer">&nbsp;</div>
 </div>
 
+
 <div class="clear">&nbsp;</div>
+<%= will_paginate @products %>

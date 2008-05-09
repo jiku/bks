@@ -1,0 +1,51 @@
+/* PRODUCT 'CHIPS' */
+.product {
+	width: 150px;
+	margin-right: 5px;
+	float: left;
+	background-image: url(/plugin_assets/substruct/images/public-ui/item-middle.gif);
+	background-repeat: repeat-y;
+}
+.product_top {
+	width: 150px;
+	height: 10px;
+	background-image: url(/plugin_assets/substruct/images/public-ui/item-top.gif);
+	background-repeat: no-repeat;
+}
+.product_bottom {
+	margin-top: -10px;
+	width: 150px;
+	height: 20px;
+	background-image: url(/plugin_assets/substruct/images/public-ui/item-bottom.gif);
+	background-repeat: no-repeat;
+}
+.product_main {
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: -10px;
+	width: 139px;
+	overflow:hidden;
+	text-align: center;
+}
+.product_image {
+	height: 130px;
+	overflow: hidden;
+}
+.product_title {
+	height: 40px;
+	margin: 4px 0px;
+	overflow: hidden;
+}
+.product .money {
+	display: block;
+	background-color: #69bf32;
+	color: #fff;
+	padding: 2px;
+	overflow: hidden;
+	-moz-border-radius: 5px;
+}
+.product .icon {
+	position:absolute;
+	margin-left: 110px;
+	z-index:300;
+}

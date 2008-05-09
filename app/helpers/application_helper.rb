@@ -59,12 +59,13 @@ module ApplicationHelper
       product << '<img src="/images/ui/icons/new.gif" alt="New" border="0" class="icon" />'
     end
     product << %Q/
-    		<div class="product_top"><\/div>
     		<div class="product_main">
-    			<div class="product_image"> 
-    			  <a href="#{link}">#{image_tag(image_path, :alt => title)}<\/a><br\/>
-    			<\/div>
-    			<div class="product_manufacturer_image" style="padding: 8px 0px;">
+          <a href="#{link}"><div class="product_image" style="background-image: url(#{image_path});">
+            <div class="corner_tl"><\/div>
+            <div class="corner_tr"><\/div>
+    			<\/div><\/a>
+
+    			<div class="product_manufacturer_image" style="padding: 4px 0px;">
             #{image_tag(manufacturer_path, :alt => manufacturer_name)}
     			<\/div>
     			<div class="product_title">
@@ -76,7 +77,6 @@ module ApplicationHelper
     end
     product << %Q/
     		<\/div>
-    		<div class="product_bottom"><\/div>
     /
     return product << '</div>'
   end

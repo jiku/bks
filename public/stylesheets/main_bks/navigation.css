@@ -1,0 +1,86 @@
+div#navigation {
+	background-color: #000000;
+	height: 48px;
+	background-image: url(/images/public-ui/nav-middle-bg.gif);
+	background-repeat: repeat-x;
+	overflow: hidden;
+}
+
+/* TOP NAVIGATION */ /* DET ER HER DET MESTE STYRES FRA, MEN OVERSTYRES DER OPPE... :P */
+
+#navigation ul.navigation li {
+	background-image: none;
+	background-repeat: no-repeat;
+	height: 48px;
+	margin-right: 16px;
+}
+
+#navigation ul.navigation li a{
+	background-image: none;
+	background-position: top right;
+	background-repeat: repeat-x;
+	height: 48px;
+	font-weight: normal;
+	display: block;
+	width: auto !important;
+	width: 50px;
+	text-align: center;
+	padding-right: 10px;
+	line-height: 48px;
+	color: #ffffff;
+	font-size: 1em;
+	white-space: nowrap;
+}
+#navigation ul.navigation li.active {
+	background-image: url(/images/public-ui/nav-tab-left.gif);
+	font-size: 1em;
+}
+
+#navigation ul.navigation li.active a{
+	background-image: url(/images/public-ui/nav-tab-right.gif);
+	color: #3b3b3b;
+	font-style: italic;
+	font-size: 1em;
+	font-weight: normal;
+	padding-right: 20px;
+	padding-left: 10px;
+}
+
+
+/* SUB */
+
+#subnavigation {
+	height: 40px;
+	background-color: #d0c8c8;
+	background-image: url(/images/public-ui/subnav-bg.gif);
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#subnavigation ul.navigation li {
+	height: 40px;
+	margin-left: 15px;
+}
+#subnavigation ul.navigation li a {
+	color: #5e5e5e;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 45px;
+	display: block;
+}
+#subnavigation ul.navigation li.active {
+	background-image: url(/images/public-ui/subnav-tab-left.gif);
+	background-repeat: no-repeat;
+	font-size: 1em;
+	margin-right: 0px;
+}
+
+#subnavigation ul.navigation li.active a{
+	background-image: url(/images/public-ui/subnav-tab-right.gif);
+	background-position: top right;
+	background-repeat: no-repeat;
+	font-style: italic;
+	font-weight: normal;
+	padding-right: 15px;
+	padding-left: 5px;
+}
+/* END NAVIGATION */

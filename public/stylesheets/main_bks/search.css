@@ -1,0 +1,9 @@
+input.search_field {
+	border: 0px;
+	width: 309px;
+	height: 45px;
+	font-size: 16px;
+	padding: 10px 10px;
+	background-image: url(/images/public-ui/search_field_bg.jpg);
+	background-repeat: no-repeat;
+}

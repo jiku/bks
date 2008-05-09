@@ -1,0 +1,63 @@
+.product {
+	width: 149px;
+	height: 237px;
+	margin: 0px 0px 48px 0px;
+	float: left;
+	background-image: url(/images/product_chips/product_bg.jpg);
+}
+.product_main {
+	margin: 0px;
+	overflow: hidden;
+	text-align: center;
+}
+.product_image {
+	margin: 1px 1px 0px 1px;
+	width: 143px;
+	height: 151px;
+	overflow: hidden;
+	display: block;
+	background-repeat: no-repeat;
+	background-color: #efefef;
+}
+.actual_image {
+	position: absolute;
+	z-index: -1;
+}
+.product_manufacturer_image {
+	width: 149px;	
+	height: 40px;
+}
+.product .corner_tl {
+	margin: -1px -1px 0px -1px; /* veier opp for tapet der oppe... */
+	float: left;
+	width: 9px;
+	height: 9px;
+	background-image: url(/images/product_chips/corner_tl.gif);
+	background-repeat: no-repeat;
+}
+.product .corner_tr {
+	margin: -1px -1px 0px -1px; /* veier opp for tapet der oppe... */
+	float: right;
+	width: 9px;
+	height: 9px;
+	background-image: url(/images/product_chips/corner_tr.gif);
+	background-repeat: no-repeat;
+}
+.product_title {
+	font-size: 10px;
+	height: 40px;
+	margin: 4px 0px;
+	overflow: hidden;
+}
+.product .money {
+	/* display: block;
+	background-color: #69bf32;
+	color: #fff; */
+	padding: 2px;
+	overflow: hidden;
+	-moz-border-radius: 0px 0px 10px 10px;
+}
+.product .icon {
+	margin-left: 110px;
+	z-index:300;
+}

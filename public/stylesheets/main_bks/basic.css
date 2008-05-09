@@ -1,0 +1,53 @@
+/*=============================================================================
+ * Public CSS file.
+ *
+ * This will be copied to /public/stylesheets when running 
+ * 'rake substruct:prepare_layout_for_modification'
+ *
+ * That file is the one that should be modified when customizing your site.
+ *
+ ============================================================================*/
+/* Reset all margins and padding to ensure x-browser compatibility */
+* {
+	padding: 0px;
+	margin: 0px;
+}
+body, html {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+body {
+	background-color: #efefef;
+}
+
+/* Sets the typeface for most of the app */
+body, table, div, td, input, textarea {
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1em;
+	color: #483324;
+}
+a {
+	font-weight: bold;
+	text-decoration: none;
+}
+a:link { color: #1382b9; }
+a:visited {	color: #b954ff; }
+a.action:link, a.action:visited, a.action.bad:link, a.action.bad:visited {
+	background-color: #049abe;
+	color: #fff !important;
+	font-weight:normal;
+	font-size: 12px;
+	padding: 4px;
+	text-decoration:none !important;
+}
+a.action.bad:link, a.action.bad:visited {
+	background-color: #770000;
+	font-weight: bold;
+}
+a.normal { font-weight: normal; }
+a.redlink, a.red:link, a.red:visited {
+	color: #804D68;
+}
