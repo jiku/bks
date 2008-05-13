@@ -190,6 +190,7 @@ class StoreController < ApplicationController
     @title = "Ordreinformasjon"
     @items = @cart.items
     @order = find_order
+    @payment_methods = PaymentMethod.find(:all, :order => 'rank ASC')
     @cc_processor = Order.get_cc_processor
     if request.get?
       if @order == nil then
@@ -206,6 +207,54 @@ class StoreController < ApplicationController
     elsif request.post?
       # Turned into a private method now so we don't have checkout/do_checkout...
       do_checkout()
+    end
+  end
+  
+  ### Changes the payment method via RJS (Ajax)
+  def update_payment_method
+    @payment_method = PaymentMethod.find(params[:payment_method])
+    logger.info "The payment method is " + @payment_method.name
+    if (@payment_method.name != "" || nil)
+      respond_to do |bs|
+        if (@payment_method.name == "Kredittkort")
+          bs.js {
+            render :update do |page|
+              page.replace_html "account_type", :partial => "account_type_kredittkort", :locals => @locals
+            end
+          }
+        end
+        if (@payment_method.name == "Oppkrav")
+          bs.js {
+            render :update do |page|
+              # page.alert "You have selected $('payment_method').value" # I have to pass it in like this or use if else statements.
+              # page.alert "Du valgte oppkrav!"
+              page.replace_html "account_type", :partial => "account_type_oppkrav"
+            end
+          }
+        end
+        if (@payment_method.name == "Forhåndsbetale")
+          bs.js {
+            render :update do |page|
+              page.replace_html "account_type", :partial => "account_type_forhåndsbetale"
+            end
+          }
+        end
+        if (@payment_method.name == "Finansering")
+          bs.js {
+            render :update do |page|
+              page.replace_html "account_type", :partial => "account_type_finansiering"
+            end
+          }
+        end
+        if (@payment_method.name == "Paypal")
+          bs.js {
+            render :update do |page|
+              page.replace_html "account_type", :partial => "account_type_paypal"
+            end
+          }
+        end
+      end
+    else
     end
   end
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 1) do
+ActiveRecord::Schema.define(:version => 2) do
 
   create_table "content_nodes", :force => true do |t|
     t.string   "name",       :limit => 200, :default => "", :null => false
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "product_id",                        :default => 0,     :null => false
     t.boolean  "is_discontinued",                   :default => false, :null => false
     t.integer  "variation_quantity",                :default => 0,     :null => false
+    t.integer  "manufacturer_id",                   :default => 0,     :null => false
   end
 
   add_index "items", ["quantity", "is_discontinued", "variation_quantity"], :name => "published"
@@ -78,6 +79,13 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 
   add_index "manufacturers", ["name"], :name => "name"
+
+  create_table "manufacturers_products", :id => false, :force => true do |t|
+    t.integer "product_id",      :default => 0, :null => false
+    t.integer "manufacturer_id", :default => 0, :null => false
+  end
+
+  add_index "manufacturers_products", ["product_id", "manufacturer_id"], :name => "manufacturer_products"
 
   create_table "order_account_types", :force => true do |t|
     t.string "name", :limit => 30, :default => "", :null => false
@@ -168,11 +176,22 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "shipping_address_id",    :default => 0,   :null => false
     t.integer  "billing_address_id",     :default => 0,   :null => false
     t.integer  "order_account_id",       :default => 0,   :null => false
+    t.integer  "payment_method_id"
   end
 
   add_index "orders", ["order_number"], :name => "order_number"
   add_index "orders", ["order_user_id"], :name => "order_user_id"
   add_index "orders", ["order_status_code_id"], :name => "status"
+
+  create_table "payment_methods", :force => true do |t|
+    t.string   "name",       :limit => 100, :default => "", :null => false
+    t.integer  "rank"
+    t.integer  "parent_id",                 :default => 0,  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payment_methods", ["name"], :name => "name"
 
   create_table "preferences", :force => true do |t|
     t.string "name",  :default => "", :null => false

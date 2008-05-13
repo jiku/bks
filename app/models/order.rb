@@ -1,6 +1,8 @@
 require_dependency RAILS_ROOT + "/vendor/plugins/substruct/app/models/order"
 
 class Order < ActiveRecord::Base
+  has_one :payment_method
+  
   def get_shipping_prices
     prices = []
     # If they're in the USA (country #1... But changed to Norway now, == 137)

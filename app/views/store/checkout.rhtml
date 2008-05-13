@@ -55,7 +55,6 @@
 		<div class="form_block">
 	    <h2>Adresse</h2>
 	    <%= render(:partial => '/admin/orders/address', :locals => {:address_type => 'billing'}) %>
-
 	    <br/>
 	    <div class="padLeft">
 	      <label><%= check_box_tag("use_separate_shipping_address", 'true', @use_separate_shipping_address, :class => 'inline', :id => 'use_diff_shipping') %> Send til en annen adresse</label>
@@ -70,13 +69,28 @@
     </div>
 
 	
-	  <!-- PAYMENT INFORMATION -->
-    <% if @cc_processor != 'PayPal IPN' -%>
-    	<div class="form_block">
-      	<%= render(:partial => '/admin/orders/account') %>
-    	</div>
-    <% end -%>
-
+		<!-- CHOOSE PAYMENT METHOD -->
+		<div class="form_block">
+	    <h2>Betaling</h2>
+			<br/>
+			<div id="payment_method">
+		  	<%= collection_select :order, :payment_method_id, @payment_methods, :id, :name %>
+				<%=
+					observe_field 'order_payment_method_id',
+					:url => {
+						:action => :update_payment_method
+					},
+					:with => "'payment_method='+escape(value)"
+				%>
+			</div>
+			<br/>
+		  <div class="line">&nbsp;</div>
+			<div id="account_type">
+    	<% if @cc_processor != 'PayPal IPN' -%>
+     		<%= render(:partial => '/admin/orders/account') %>
+    	<% end -%>
+			</div>
+		</div>
 
 		<!-- PROMO CODE -->
 		<% if Promotion.any_active? %>
@@ -124,7 +138,7 @@
   </p>
 
 
-  <h2>Er det noe du stusser på?</h2>
+  <h2>Vil du ha hjelp?</h2>
   <p>
     <a href="/contact">Kontakt oss</a>
   </p>

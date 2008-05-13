@@ -515,6 +515,7 @@ input.error {
 	background-image: url(/plugin_assets/substruct/images/public-ui/column-fade-middle.gif);
 	background-repeat: repeat-x;
 	border-top: 2px solid #ccc;
+	background-color: #ffffff;
 }
 .form_block h2 {
 	margin-bottom: 10px;

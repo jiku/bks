@@ -27,7 +27,7 @@ class CreateManufacturers < ActiveRecord::Migration
     add_index :manufacturer_images, ['manufacturer_id', 'image_id'], :name => 'main'
     
 		puts 'Adding default rights for Manufacturers...'
-		Load in new roles - otherwise nobody would have access!
+		# Load in new roles - otherwise nobody would have access!
 		rights = Right.create(
 		  [ 
 			  { :name => 'Manufacturers - Admin', :controller => 'manufacturers', :actions => '*' },

@@ -1,0 +1,104 @@
+Objective:
+
+To add a choice of payment methods at checkout.
+This choice will be a select menu.
+When selecting a choice, additional input fields for data
+needed to process this payment method will appear.
+
+Options shown to the customer at checkout are
+
+Kredittkort
+Oppkrav
+Forhåndsbetaling
+Finansiering
+PayPal
+Google Checkout
+
+
+OPTIONS:
+
+
+Cash on delivery:
+The fee for sending as COD will be added to the total.
+Here in Norway, it's about 80,- NOK or so.
+The item(s) will ship immediately*.
+
+
+Advance payment:
+No fee will be added to the total.
+The item(s) will ship as soon as the money has been
+received*.
+
+
+Credit-card:
+
+The item(s) will ship as soon as the payment
+gateway has confirmed the capture of funds.
+Will have to choose a gateway.
+This also has to be implemented in Substruct.
+There are probably minor issues which will arise
+when choosing a different gateway than Authorize.net
+or Paypal IPN.
+
+There has been some development for Cardia/DIBS,
+which is a norwegian gateway, but it seems stagnant,
+and has to be fleshed out to work with ActiveMerchant.
+May want to provide a choice between several gateways
+for the customer to choose from.
+I.e. Google Checkout, Paypal, in addition to what will
+appear as conventional CC processing, since this allows
+customers that have funds already allocated in their
+Google Checkout or Paypal accounts to pay with those.
+
+
+Down payment:
+This is a bit more advanced, and will be the last
+payment method added.
+We have the choice between using Her & Nå (G.E. MoneyBank)
+or Cresco.
+Have to research this a bit more, but it's not
+1st priority for initial deployment.
+
+---
+
+* Provided the items are in stock and/or depending on
+whether the customer has chosen to receive
+partial shipment for this order.
+Partial shipments are probably not part of Substruct yet,
+so adding this would be a good idea.
+
+
+++++
+
+
+puts 'Adding default payment methods'
+defaults = PaymentMethod.create(
+  [ 
+	  { :name => 'Kredittkort', :rank => '1' },
+	  { :name => 'Oppkrav', :rank => '2' },
+	  { :name => 'Forhåndsbetale', :rank => '3' },
+	  { :name => 'Finansiering', :rank => '4' },
+	  { :name => 'Paypal', :rank => '5' },
+	  { :name => 'Google Checkout', :rank => '6' }
+  ]
+)
+
+----
+
+Through RJS/Ajax, make it back to the controller and
+render :update the payment method div with a partial based
+on the value from the controller_select.
+Simple!
+Have to find some way of circumventing the whole
+CC thing if it's not going to be used anyway.
+Look into how it processes Authorize.net and PayPal IPN
+differently can give a clue on how to do this.
+As of now in Substruct, there is a get_cc_processor()
+method in the Order model and some such.
+There is also a table called order_account_types,
+which seems to be unused and would have been similar
+to payment_methods.
+I could go over to using that to keep it consistent,
+and then just do over the whole cc_processor thing to
+payment_method or something like that.
+I'll look into it later.

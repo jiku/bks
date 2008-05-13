@@ -1,0 +1,16 @@
+There has to be a few additional views here.
+
+A list view, which is when you press a category.
+
+
+It's not necessary to be able to browse by manufacturer.
+Browsing by manufacturer either means you don't know what you're
+looking for, or that you can't use the search function.
+
+Having filters might be a good idea. Not sure yet.
+
+There should be a live search.
+
+The list view has to be implemented ASAP.
+
+It's very important, though not as important as payment.
