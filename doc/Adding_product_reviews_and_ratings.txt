@@ -1,0 +1,29 @@
+Reviews is a new model and table.
+It belongs to both products and users,
+meaning a product has many reviews, and a
+user has many reviews as well.
+
+Meaning reviews will have two foreign keys,
+products_id and users_id.
+
+Rating is just a field in a review.
+
+When viewing a product, do something like
+
+@reviews = Review.Find(:all) where params[:id] == product_id
+
+
+And when viewing a user
+
+@reviews = Review.Find(:all) where params[:id] == user_id
+
+--
+
+Then in the view, just find some way to make the average rating.
+Shouldn't be too hard.
+
+---
+
+If a review is not about the product, but something else
+like the store, then we should excersise our right to remove it.
+Have a disclaimer to state this.

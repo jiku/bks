@@ -1,9 +1,7 @@
 div#navigation {
-	background-color: #000000;
+	background-color: #cccccc;
 	height: 48px;
-	background-image: url(/images/public-ui/nav-middle-bg.gif);
-	background-repeat: repeat-x;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 /* TOP NAVIGATION */ /* DET ER HER DET MESTE STYRES FRA, MEN OVERSTYRES DER OPPE... :P */
@@ -48,33 +46,33 @@ div#navigation {
 
 
 /* SUB */
-
-#subnavigation {
+/*
+#navigation #sub {
 	height: 40px;
 	background-color: #d0c8c8;
 	background-image: url(/images/public-ui/subnav-bg.gif);
 	margin-left: 10px;
 	margin-right: 10px;
 }
-#subnavigation ul.navigation li {
+#navigation #sub ul.navigation li {
 	height: 40px;
 	margin-left: 15px;
 }
-#subnavigation ul.navigation li a {
+#navigation #sub ul.navigation li a {
 	color: #5e5e5e;
 	font-weight: normal;
 	font-size: 15px;
 	line-height: 45px;
 	display: block;
 }
-#subnavigation ul.navigation li.active {
+#navigation #sub ul.navigation li.active {
 	background-image: url(/images/public-ui/subnav-tab-left.gif);
 	background-repeat: no-repeat;
 	font-size: 1em;
 	margin-right: 0px;
 }
 
-#subnavigation ul.navigation li.active a{
+#navigation #sub ul.navigation li.active a{
 	background-image: url(/images/public-ui/subnav-tab-right.gif);
 	background-position: top right;
 	background-repeat: no-repeat;
@@ -83,4 +81,20 @@ div#navigation {
 	padding-right: 15px;
 	padding-left: 5px;
 }
-/* END NAVIGATION */
+*/
+
+/* SIDE */
+
+#side_navigation a, a:visited {
+	font-weight: bold;
+	color: #222222;
+}
+
+#side_navigation a:hover {
+	background: #7777cc;
+}
+
+#side_navigation #sub a, a:visited {
+	font-weight: normal;
+	color: #666666;
+}

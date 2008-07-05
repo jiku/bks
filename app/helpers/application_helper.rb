@@ -43,7 +43,7 @@ module ApplicationHelper
 	
 		begin
 		  parts = number_with_precision(number, precision).split('.')
-			"kr " + number_with_delimiter(parts[0], delimiter) + ",-"
+			number_with_delimiter(parts[0], delimiter) + ",-"
 		rescue
 		  number
 		end

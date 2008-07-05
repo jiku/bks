@@ -47,6 +47,9 @@ class StoreController < ApplicationController
       :page => params[:page],
       :per_page => 10
     )
+
+    @manufacturers = Manufacturer.find(:all)
+    @products_by_manufacturers = @products.group_by { |t| t.manufacturer.name }
   end
   
   def search
@@ -86,7 +89,9 @@ class StoreController < ApplicationController
 		viewing_tag_names = @viewing_tags.collect { |t| " > #{t.name}"}
 		@title = "Butikk #{viewing_tag_names}"
 		@tags = Tag.find_related_tags(tag_ids_array)
-		
+
+		# @current_tag = @viewing_tags[0]
+
 		# Paginate products so we don't have a ton of ugly SQL
 		# and conditions in the controller		
 		per_page = 10
@@ -95,6 +100,9 @@ class StoreController < ApplicationController
     @products = returning WillPaginate::Collection.new(params[:page] || 1, per_page, list.size) do |p|
       p.replace list[pager.current.offset, pager.items_per_page]
     end
+
+    @manufacturers = Manufacturer.find(:all)
+    @products_by_manufacturers = @products.group_by { |t| t.manufacturer.name }
 		
 		render :action => 'index'
 	end

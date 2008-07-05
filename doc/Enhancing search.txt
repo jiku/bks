@@ -1,0 +1,38 @@
+Partial searches for both manufacturers and products
+Add search terms (maybe)
+Interactive search helper thing
+
+
+
+Partial searches for both manufacturers and products:
+
+Necessary. Works only for products (the initial Substruct search function)
+thus far.
+
+Add search terms (maybe):
+
+This means that if a manufacturer or product is called A, but is often
+referred to as B or C, a person can type in B or C and find A, because there
+is a field that relates these search terms to it.
+Whether it be a field or some kind of join table (relational table that binds
+two other tables together), I'm not sure.
+But what about a HM/BT relationship.
+I.e. that both a manufacturer and a product has many search_terms, and a
+search_term belongs to many manufacturers and products.
+Seems easy enough to make?
+Then decide whether or not the search function should only search
+through these search terms, or these AND products + manufacturers directly,
+so you don't HAVE to set up search terms for them.
+Even if when creating a product, a default search term with
+the same name as the product.name was also created, there would
+be duplication, which isn't cool.
+It could be just as well to add a field called search_terms to both
+the manufacturers and products tables.
+It's a bit more obtrusive in one way, since it 'clutters' those tables,
+but it would be like that anyhow because of :belongs_to, :has_many + search_term_id, etc.
+
+Interactive search helper thing:
+
+One that gives tips continually like what is already in Substruct
+to find product names + what Ryan Bates has done in one of his
+tutorials on auto-completion.

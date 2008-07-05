@@ -618,51 +618,6 @@ div.p * {
 	overflow:hidden;
 }
 
-/* Left content container */
-#left {
-	float:left;
-	width: 630px !important;
-	width: 610px;
-	margin-left: 10px;
-	border-right: 1px dashed #bfb4a9;
-	padding-right: 20px;
-	margin-right: 20px;
-	min-height: 500px;
-	margin-bottom: 20px;
-}
-
-/* Right content */
-#right {
-	float:left;
-	width: 280px;
-	padding-bottom: 20px;
-}
-
-
-#right .textInput {
-	font-size: 15px;
-	line-height: 30px;
-	padding-top: 5px !important;
-	padding-top: 10px;
-	height: 25px;
-}
-
-#right h2 {
-	color: #5e5e5e;
-}
-#right h3 {
-	color: #8a8075;
-	text-align: center;
-}
-
-#left, #right, #fullContent {
-}
-
-#fullContent {
-	width: auto;
-	margin: 0px 10px;
-}
-
 #customer_msg {
 	position: absolute;
 	margin-left: 390px;

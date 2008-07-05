@@ -2,3 +2,18 @@
 	width: 1000px;
 	margin: 0px auto;
 }
+
+/* Virker ikke i FF3... */
+table, th, tr, td {
+	vertical-align: top;
+	text-align: top;
+}
+
+.buy {
+	background-image: url(/images/public-ui/buttons/cart.jpg);
+	width: 32px;
+	height: 30px;
+	border: 0px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+}

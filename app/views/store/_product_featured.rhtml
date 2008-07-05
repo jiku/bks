@@ -1,0 +1,52 @@
+<%
+	product = product_featured
+	manufacturer_image_url = '/images/manufacturers/' + product.manufacturer.name + '.gif'
+%>
+
+<tr valign="top">
+	<td valign="top">
+		<%# link_to image_tag (product.images[0].public_filename(:small)), :controller => 'store', :action => 'show', :id => product.code %>
+		<div class="product">
+			<!--div class="product_main">
+				<div class="product_image"><%= link_to image_tag (product.images[0].public_filename(:small)), :controller => 'store', :action => 'show', :id => product.code %></div>
+				<div class="corner_tl"></div>
+				<div class="corner_tr"></div-->
+				<a href="<%= url_for(:controller => 'store', :action => 'show', :id => product.code) %>"><div class="product_image" style="background-image: url(<%= product.images[0].public_filename(:small) %>);">
+					<div class="corner_tl"></div>
+					<div class="corner_tr"></div>
+				</div></a>
+
+				<div class="product_manufacturer_image" style="padding: 12px 21px;">
+					<img src="/images/public-ui/rating/3-5.gif"/>
+		 		</div>
+				<div class="product_title" style="padding: 0px 45px; margin-top: -10px; font-size: 16px;">
+					<%= number_to_currency(product.display_price) %>
+				</div>
+			</div>
+		</div>
+	</td>
+	<td>
+	<%= image_tag (manufacturer_image_url) %><br/>
+	<br/>
+	<%= link_to product.name, :controller => 'store', :action => 'show', :id => product.code %><br/>
+
+		<br/>
+		Dette er et helt nytt produkt med helt unike egenskaper... <br/>
+		<br/>
+
+	<!--td class="rating"><img src="/images/public-ui/rating/3-5.gif"/></td>
+	<td class="price"><%= number_to_currency(product.display_price) %></td-->
+
+		<%= form_remote_tag(
+					:url=> { :controller => 'store', :action => 'add_to_cart_ajax', :id => product.id },
+					:html => {:name => 'add_product_form'},
+					:complete => "showPopWin('/store/show_cart', 600, 400, null, true)",
+					:failure => 'alert("Det ser ut til at vi gikk tom for dette produktet før du fikk lagt det til i handlekurven din.\n\nDu kan prøve å oppdatere siden.")',
+					:update => 'items'
+				)
+	%>
+	<input type="submit" class="buy" value="" />	
+		</form>
+	</td>
+</tr>
+<!--tr><td><br/></td></tr-->

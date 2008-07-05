@@ -1,0 +1,21 @@
+<%
+	product = product_list
+%>
+
+<tr class="item">
+	<td><%= link_to product.name, :controller => 'store', :action => 'show', :id => product.code %></td>
+	<td class="rating"><img src="/images/public-ui/rating/3-5.gif"/></td>
+	<td class="price"><%= number_to_currency(product.display_price) %></td>
+	<td class="buy">
+		<%= form_remote_tag(
+					:url=> { :controller => 'store', :action => 'add_to_cart_ajax', :id => product.id },
+					:html => {:name => 'add_product_form'},
+					:complete => "showPopWin('/store/show_cart', 600, 400, null, true)",
+					:failure => 'alert("Det ser ut til at vi gikk tom for dette produktet før du fikk lagt det til i handlekurven din.\n\nDu kan prøve å oppdatere siden.")',
+					:update => 'items'
+				)
+	%>
+	<input type="submit" class="buy" value="" />	
+		</form>
+	</td>
+</tr>

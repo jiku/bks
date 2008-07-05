@@ -1,0 +1,48 @@
+Update:
+
+We need a has_and_belongs_to_many HABTM relationship.
+That's to say, we need multiple parent id's.
+A tag name should only appear once, but in multiple
+contexts.
+
+But since it habtm itself, i.e. to tags, how do we do that?
+It's all internal.
+
+----
+
+The current tags-system requires uniqueness of names
+regardless of which level they are at.
+
+I'd like to change this so that same-level uniqueness still
+applies, but the same tag-name can be used at different
+levels.
+
+Also, that when something is at the same "level", but
+nested apart from eachother, the name can be the same.
+
+I.e.
+
+
+Guitar
+	Electric
+	
+Bass
+	Electric
+	
+	
+"Electric" should be possible in both places, but
+it shouldn't be possible to have
+
+Guitar
+	Electric
+	Electric
+	
+or
+
+Guitar
+Guitar
+	Electric
+	
+
+duplicates in that sense.
+So, same-level uniqueness still applies.

@@ -3,12 +3,14 @@ div#header {
 	height: 72px;
 	padding: 24px 96px;
 	background-color: #ffffff;
+	
+	border: 1px solid #dddddd;
+	
+	border-top: 0px;
+	border-bottom: 0px;
 }
 
-
-
 /* His stuff */
-
 
 #toplinks {
 	float: right;
